@@ -1,5 +1,6 @@
 import React, { FormEventHandler } from "react";
 import { Input, Button } from "components";
+import { addFarm } from "apis";
 
 const FarmAddForm = () => {
   /*TODO: Q2-2 API 통신 (Farm 의 문제를 다 끝내고 진행하셔도 무방합니다.)
@@ -14,15 +15,18 @@ const FarmAddForm = () => {
     TODO: Q4-3
     - 각 모달에는 닫기 버튼을 추가하여 모달이 수동으로 닫혀야 합니다.
   */
-  const handleFarmAddSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleFarmAddSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
     const { farmName, cropName } = e.target as typeof e.target & {
       farmName: { value: string };
       cropName: { value: string };
     };
-
-    console.log(farmName.value, cropName.value);
+    try {
+      addFarm({ name: farmName.value, crop: cropName.value });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
