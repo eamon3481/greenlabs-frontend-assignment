@@ -1,7 +1,7 @@
 import useFarms from "queries/useFarms";
 import React from "react";
 import FarmList from "./FarmList";
-// import type { ProductionType, FarmsType } from "libs/type";
+import { getProductionTotal } from "utils";
 
 const Farm = () => {
   /* TODO: Q3-1 화면 조작
@@ -20,7 +20,7 @@ const Farm = () => {
         <FarmList
           key={farm.id}
           {...farm}
-          productionTotal={0}
+          productionTotal={getProductionTotal(farm.annualProduction)}
           HouseActive={() => {}}
         />
       ))}
