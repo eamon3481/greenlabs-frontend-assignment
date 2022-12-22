@@ -2,6 +2,7 @@ import React, { FormEventHandler } from 'react';
 import { ScreenWrap, Container, Input, Button } from 'components';
 import { useSetRecoilState } from 'recoil';
 import { userAtom } from 'stores';
+import { useRouter } from 'next/router';
 
 //TODO: Q1-1 로그인 상태 관리
 // 상태관리 라이브러리 (context, redux, recoil 등) 을 활용해서 로그인 상태를 관리하는 기능을 개발 해주세요
@@ -9,15 +10,22 @@ import { userAtom } from 'stores';
 // 로그인이 완료되면 /home 라우터로 이동해야합니다.
 
 const Login = () => {
+ const router = useRouter();
+ const setUser = useSetRecoilState(userAtom);
+
  const handleLoginSubmit: FormEventHandler<HTMLFormElement> = (e) => {
   e.preventDefault();
+
   const { id, name } = e.target as typeof e.target & {
    id: { value: string };
    name: { value: string };
   };
 
-  console.log(id.value, name.value);
+  setUser({ id: id.value, name: name.value });
+
+  router.push('/home');
  };
+
  return (
   <Container>
    <ScreenWrap>
