@@ -16,20 +16,24 @@ const FarmAddForm = () => {
   */
 
   return (
-    <div className="flex flex-col gap-4 px-2">
+    <form className="flex flex-col gap-4 px-2">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
-          <span>농장 명</span>
-          <Input name="name" type="text" />
+          <label>
+            농장 명
+            <Input name="name" type="text" />
+          </label>
         </div>
 
         <div className="flex flex-col">
-          <span>작물명</span>
-          <Input name="name" type="text" />
+          <label>
+            작물명
+            <Input name="name" type="text" />
+          </label>
         </div>
       </div>
       <Button>저장</Button>
-    </div>
+    </form>
   );
 };
 
