@@ -1,11 +1,11 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export type User = {
- id: string;
- name: string;
+  id: string;
+  name: string;
 };
 
 export const userAtom = atom<User | null>({
- key: 'userAtom',
- default: null,
+  key: "userAtom",
+  default: null,
 });
