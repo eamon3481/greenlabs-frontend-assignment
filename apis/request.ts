@@ -1,7 +1,7 @@
 import { FarmsType } from "libs/type";
 import { API, call } from "./API";
 
-type GetFarmListResponseType = { farms: FarmsType[] };
+export type GetFarmListResponseType = { farms: FarmsType[] };
 
 export const getFarmList = () =>
   call<GetFarmListResponseType>(() => API.get("/api/farm"));
