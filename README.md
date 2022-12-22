@@ -18,9 +18,10 @@
 
 ## 과제
 
-1. 상태관리 - 로그인 페이지에서 로그인 후 로그인 된 상태가 전역에서 유지 되어야함 (context, redux, recoil 등 사용 자율)
-   1. Q1-1 pages/index.tsx
-   2. Q1-2 components/Header.tsx
+- [x] 1. 상태관리 - 로그인 페이지에서 로그인 후 로그인 된 상태가 전역에서 유지 되어야함 (context, redux, recoil 등 사용 자율)
+  1. Q1-1 pages/index.tsx
+  1. Q1-2 components/Header.tsx
+
 2. api 통신 (api 통신을 통해 결과 화면 출력)
    1. Q2-1 components/Farm/index.tsx
    2. Q2-2 components/FarmAddForm/index.tsx
