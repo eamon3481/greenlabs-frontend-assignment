@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { GetFarmListResponseType } from "apis";
 import { getQueryKey } from "queries";
+import { editArrayDate } from "utils";
 
 const useActiveHouse = () => {
   const queryClient = useQueryClient();
@@ -11,23 +12,23 @@ const useActiveHouse = () => {
       (prevFarms) => {
         if (!prevFarms) return prevFarms;
 
-        const newFarms = prevFarms.farms.map((farm) => {
-          if (farm.id === farmId && farm.houses) {
+        const newFarms = editArrayDate(
+          prevFarms.farms,
+          "id",
+          farmId,
+          (farm) => {
+            if (!farm.houses) return farm;
             return {
               ...farm,
-              houses: farm.houses.map((house) => {
-                if (house.id === houseId) {
-                  return {
-                    ...house,
-                    active: !house.active,
-                  };
-                }
-                return house;
+              houses: editArrayDate(farm.houses, "id", houseId, (house) => {
+                return {
+                  ...house,
+                  active: !house.active,
+                };
               }),
             };
           }
-          return farm;
-        });
+        );
 
         return { farms: newFarms };
       }
