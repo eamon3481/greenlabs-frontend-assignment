@@ -4,11 +4,6 @@ import { useSetRecoilState } from 'recoil';
 import { userAtom } from 'stores';
 import { useRouter } from 'next/router';
 
-//TODO: Q1-1 로그인 상태 관리
-// 상태관리 라이브러리 (context, redux, recoil 등) 을 활용해서 로그인 상태를 관리하는 기능을 개발 해주세요
-// 라이브러리 사용은 자율입니다.
-// 로그인이 완료되면 /home 라우터로 이동해야합니다.
-
 const Login = () => {
  const router = useRouter();
  const setUser = useSetRecoilState(userAtom);
