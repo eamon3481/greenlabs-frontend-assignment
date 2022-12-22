@@ -14,7 +14,7 @@ const Input = ({
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 } & Omit<
-  InputHTMLAttributes<any>,
+  InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "value" | "type" | "name" | "placeholder"
 >) => (
   <div className="border rounded overflow-hidden">
