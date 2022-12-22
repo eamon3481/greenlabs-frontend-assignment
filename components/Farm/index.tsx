@@ -5,9 +5,6 @@ import { getProductionTotal } from "utils";
 import useActiveHouse from "hooks/useActiveHouse";
 
 const Farm = () => {
-  /* TODO: Q3-2 화면 조작
-  - 랜더링 된 컴포넌트에서 하우스를 동작시키는 함수를 작성해 주세요 역시 예시 이미지를 확인 하세요.
-  */
   const { data, isLoading } = useFarms();
   const { activeHouse } = useActiveHouse();
 

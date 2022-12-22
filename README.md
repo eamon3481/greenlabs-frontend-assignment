@@ -26,9 +26,10 @@
   1. Q2-1 components/Farm/index.tsx
   1. Q2-2 components/FarmAddForm/index.tsx
 
-3. 화면 조작
-   1. Q3-1 components/Farm/index.tsx
-   2. Q3-2 components/Farm/index.tsx
+- [x] 3. 화면 조작
+  1. Q3-1 components/Farm/index.tsx
+  1. Q3-2 components/Farm/index.tsx
+
 4. UI 개발 (예시 이미지를 제공 후 구현)
    1. Q4-2 components/FarmAddForm/index.tsx
    2. Q4-2 components/FarmAddForm/index.tsx
