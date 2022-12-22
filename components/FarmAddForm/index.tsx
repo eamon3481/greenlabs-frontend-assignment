@@ -3,8 +3,7 @@ import { Input, Button } from "components";
 import { addFarm } from "apis";
 
 const FarmAddForm = () => {
-  /*TODO: Q2-2 API 통신 (Farm 의 문제를 다 끝내고 진행하셔도 무방합니다.)
-    - api/addfarm 경로로 {name,crop} 값을 post 로 요청합니다.
+  /*
     TODO: Q4 Portal 을 활용하여 모달을 구현합니다.
     - 위에서 호출된 결과 값을 화면에 출력 해야 합니다.
     - 예시는 이미지를 참고해 주세요
