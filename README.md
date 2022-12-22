@@ -22,9 +22,10 @@
   1. Q1-1 pages/index.tsx
   1. Q1-2 components/Header.tsx
 
-2. api 통신 (api 통신을 통해 결과 화면 출력)
-   1. Q2-1 components/Farm/index.tsx
-   2. Q2-2 components/FarmAddForm/index.tsx
+- [x] 2. api 통신 (api 통신을 통해 결과 화면 출력)
+  1. Q2-1 components/Farm/index.tsx
+  1. Q2-2 components/FarmAddForm/index.tsx
+
 3. 화면 조작
    1. Q3-1 components/Farm/index.tsx
    2. Q3-2 components/Farm/index.tsx
