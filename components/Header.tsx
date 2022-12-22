@@ -2,10 +2,17 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from 'stores';
+import { useEffect } from 'react';
 
 const Header = () => {
  const router = useRouter();
  const user = useRecoilValue(userAtom);
+
+ useEffect(() => {
+  if (!user) {
+   router.push('/');
+  }
+ }, []);
 
  return (
   <header className="border-b p-2 py-4">
