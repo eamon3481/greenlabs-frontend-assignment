@@ -17,7 +17,12 @@ const Farm = () => {
   return (
     <div className="px-2 flex flex-col gap-2">
       {data.farms.map((farm) => (
-        <FarmList {...farm} productionTotal={0} HouseActive={() => {}} />
+        <FarmList
+          key={farm.id}
+          {...farm}
+          productionTotal={0}
+          HouseActive={() => {}}
+        />
       ))}
     </div>
   );
