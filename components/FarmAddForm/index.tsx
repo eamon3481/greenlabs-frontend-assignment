@@ -1,4 +1,4 @@
-import React, { FormEventHandler } from "react";
+import React, { FormEventHandler, useState } from "react";
 import { Input, Button, Portal, Title } from "components";
 import { addFarm } from "apis";
 import useModal from "hooks/useModal";
@@ -17,6 +17,11 @@ const FarmAddForm = () => {
   */
 
   const { isModalOpen, open, close } = useModal();
+  const [postResult, setPostResult] = useState<null | {
+    name: string;
+    crop: string;
+  }>(null);
+
   const handleFarmAddSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -25,17 +30,21 @@ const FarmAddForm = () => {
       crop: { value: string };
     };
 
-    if (!name.value || !crop.value) return;
+    if (!name.value || !crop.value) {
+      open();
+      return;
+    }
 
     try {
       await addFarm({
         name: name.value,
         crop: crop.value,
       });
-      open();
+      setPostResult({ name: name.value, crop: crop.value });
     } catch (e) {
       console.error(e);
     }
+    open();
   };
 
   return (
@@ -62,8 +71,14 @@ const FarmAddForm = () => {
         <Portal backgroundClick={close}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 items-center">
-              <Title title="농장 추가 성공!" />
-              <p>농장 추가에 성공하였습니다.</p>
+              <Title
+                title={postResult ? "농장 추가 성공!" : "농장 추가 실패!"}
+              />
+              {postResult && (
+                <p>
+                  농장명 : {postResult.name} , 작물명 : {postResult.crop}
+                </p>
+              )}
             </div>
             <Button onClick={close}>닫기</Button>
           </div>
