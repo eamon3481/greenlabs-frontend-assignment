@@ -9,4 +9,4 @@ export const getFarmList = () =>
 export type AddFarmRequestType = { name: string; crop: string };
 
 export const addFarm = (farm: AddFarmRequestType) =>
-  call(() => API.post("/api/addfarm", farm));
+  call(() => API.post<{ result: AddFarmRequestType }>("/api/addfarm", farm));

@@ -1,13 +1,16 @@
 import React, { FormEventHandler } from "react";
-import { ScreenWrap, Container, Input, Button } from "components";
+import { ScreenWrap, Container, Input, Button, MassageModal } from "components";
 import { useSetRecoilState } from "recoil";
 import { userAtom } from "stores";
 import { useRouter } from "next/router";
+import { useModal } from "hooks";
+import { MASSAGE } from "constant";
 
 const Login = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userAtom);
 
+  const { isModalOpen, open, close } = useModal();
   const handleLoginSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -15,6 +18,10 @@ const Login = () => {
       id: { value: string };
       name: { value: string };
     };
+    if (!id.value || !name.value) {
+      open();
+      return;
+    }
 
     setUser({ id: id.value, name: name.value });
 
@@ -45,6 +52,12 @@ const Login = () => {
           />
           <Button>로그인</Button>
         </form>
+        <MassageModal
+          title={MASSAGE.LOGIN_EMPTY_ERROR.title}
+          description={MASSAGE.LOGIN_EMPTY_ERROR.description}
+          close={close}
+          isModalOpen={isModalOpen}
+        />
       </ScreenWrap>
     </Container>
   );
