@@ -7,7 +7,7 @@ interface Type {
   backgroundClick?: () => void;
 }
 
-const Portal = ({ children, selector = "_modal" }: Type) => {
+const Portal = ({ children, selector = "_modal", backgroundClick }: Type) => {
   const [element, setElement] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -19,7 +19,10 @@ const Portal = ({ children, selector = "_modal" }: Type) => {
   }
 
   return ReactDOM.createPortal(
-    <div className="bg-black bg-opacity-30 absolute z-50 top-0 w-full h-screen flex justify-center items-center">
+    <div
+      onClick={backgroundClick}
+      className="bg-black bg-opacity-30 absolute z-50 top-0 w-full h-screen flex justify-center items-center"
+    >
       <div className="bg-white w-[90%] rounded p-2">{children}</div>
     </div>,
     element

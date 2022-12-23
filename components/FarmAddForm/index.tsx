@@ -1,6 +1,7 @@
 import React, { FormEventHandler } from "react";
-import { Input, Button } from "components";
+import { Input, Button, Portal, Title } from "components";
 import { addFarm } from "apis";
+import useModal from "hooks/useModal";
 
 const FarmAddForm = () => {
   /*
@@ -14,39 +15,61 @@ const FarmAddForm = () => {
     TODO: Q4-3
     - 각 모달에는 닫기 버튼을 추가하여 모달이 수동으로 닫혀야 합니다.
   */
+
+  const { isModalOpen, open, close } = useModal();
   const handleFarmAddSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const { farmName, cropName } = e.target as typeof e.target & {
-      farmName: { value: string };
-      cropName: { value: string };
+    const { name, crop } = e.target as typeof e.target & {
+      name: { value: string };
+      crop: { value: string };
     };
+
+    if (!name.value || !crop.value) return;
+
     try {
-      addFarm({ name: farmName.value, crop: cropName.value });
+      await addFarm({
+        name: name.value,
+        crop: crop.value,
+      });
+      open();
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <form className="flex flex-col gap-4 px-2" onSubmit={handleFarmAddSubmit}>
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col">
-          <label>
-            농장 명
-            <Input name="farm-name" type="text" />
-          </label>
-        </div>
+    <>
+      <form className="flex flex-col gap-4 px-2" onSubmit={handleFarmAddSubmit}>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col">
+            <label>
+              농장 명
+              <Input name="name" type="text" />
+            </label>
+          </div>
 
-        <div className="flex flex-col">
-          <label>
-            작물명
-            <Input name="crop-name" type="text" />
-          </label>
+          <div className="flex flex-col">
+            <label>
+              작물명
+              <Input name="crop" type="text" />
+            </label>
+          </div>
         </div>
-      </div>
-      <Button>저장</Button>
-    </form>
+        <Button>저장</Button>
+      </form>
+      {isModalOpen && (
+        <Portal backgroundClick={close}>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-center">
+              <Title title="농장 추가 성공!" />
+              <p>농장 추가에 성공하였습니다.</p>
+            </div>
+            <Button onClick={close}>닫기</Button>
+          </div>
+        </Portal>
+      )}
+    </>
   );
 };
 
