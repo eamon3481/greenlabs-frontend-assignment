@@ -1,8 +1,8 @@
-import useFarms from "queries/useFarms";
 import React from "react";
-import FarmList from "./FarmList";
+import { useFarms } from "queries";
 import { getProductionTotal } from "utils";
-import useActiveHouse from "hooks/useActiveHouse";
+import { useActiveHouse } from "hooks";
+import FarmList from "./FarmList";
 
 const Farm = () => {
   const { data, isLoading } = useFarms();
