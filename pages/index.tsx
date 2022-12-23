@@ -11,6 +11,7 @@ import { useSetRecoilState } from "recoil";
 import { userAtom } from "stores";
 import { useRouter } from "next/router";
 import useModal from "hooks/useModal";
+import { MASSAGE } from "constant";
 
 const Login = () => {
   const router = useRouter();
@@ -62,8 +63,8 @@ const Login = () => {
           <Portal backgroundClick={close}>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-4 items-center">
-                <Title title={"로그인 실패!"} />
-                <p>아이디와 이름을 입력해주세요</p>
+                <Title title={MASSAGE.LOGIN_EMPTY_ERROR.title} />
+                <p>{MASSAGE.LOGIN_EMPTY_ERROR.description}</p>
               </div>
               <Button onClick={close}>닫기</Button>
             </div>

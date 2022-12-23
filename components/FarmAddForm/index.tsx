@@ -2,6 +2,7 @@ import React, { FormEventHandler, useState } from "react";
 import { Input, Button, Portal, Title } from "components";
 import { addFarm } from "apis";
 import useModal from "hooks/useModal";
+import { MASSAGE } from "constant";
 
 const FarmAddForm = () => {
   const { isModalOpen, open, close } = useModal();
@@ -60,13 +61,17 @@ const FarmAddForm = () => {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 items-center">
               <Title
-                title={postResult ? "농장 추가 성공!" : "농장 추가 실패!"}
+                title={
+                  postResult
+                    ? MASSAGE.ADD_FARM_SUCCESS.title
+                    : MASSAGE.ADD_FARM_EMPTY_ERROR.title
+                }
               />
-              {postResult && (
-                <p>
-                  농장명 : {postResult.name} , 작물명 : {postResult.crop}
-                </p>
-              )}
+              <p>
+                {postResult
+                  ? MASSAGE.ADD_FARM_SUCCESS.description(postResult)
+                  : MASSAGE.ADD_FARM_EMPTY_ERROR.description}
+              </p>
             </div>
             <Button onClick={close}>닫기</Button>
           </div>
