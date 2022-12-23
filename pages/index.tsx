@@ -1,16 +1,9 @@
 import React, { FormEventHandler } from "react";
-import {
-  ScreenWrap,
-  Container,
-  Input,
-  Button,
-  Portal,
-  Title,
-} from "components";
+import { ScreenWrap, Container, Input, Button, MassageModal } from "components";
 import { useSetRecoilState } from "recoil";
 import { userAtom } from "stores";
 import { useRouter } from "next/router";
-import useModal from "hooks/useModal";
+import { useModal } from "hooks";
 import { MASSAGE } from "constant";
 
 const Login = () => {
@@ -59,17 +52,12 @@ const Login = () => {
           />
           <Button>로그인</Button>
         </form>
-        {isModalOpen && (
-          <Portal backgroundClick={close}>
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-4 items-center">
-                <Title title={MASSAGE.LOGIN_EMPTY_ERROR.title} />
-                <p>{MASSAGE.LOGIN_EMPTY_ERROR.description}</p>
-              </div>
-              <Button onClick={close}>닫기</Button>
-            </div>
-          </Portal>
-        )}
+        <MassageModal
+          title={MASSAGE.LOGIN_EMPTY_ERROR.title}
+          description={MASSAGE.LOGIN_EMPTY_ERROR.description}
+          close={close}
+          isModalOpen={isModalOpen}
+        />
       </ScreenWrap>
     </Container>
   );

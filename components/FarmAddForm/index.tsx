@@ -1,7 +1,7 @@
 import React, { FormEventHandler, useState } from "react";
-import { Input, Button, Portal, Title } from "components";
+import { Input, Button, MassageModal } from "components";
 import { addFarm } from "apis";
-import useModal from "hooks/useModal";
+import { useModal } from "hooks";
 import { MASSAGE } from "constant";
 
 const FarmAddForm = () => {
@@ -36,6 +36,14 @@ const FarmAddForm = () => {
     open();
   };
 
+  const modalTitle = postResult
+    ? MASSAGE.ADD_FARM_SUCCESS.title
+    : MASSAGE.ADD_FARM_EMPTY_ERROR.title;
+
+  const modalDescription = postResult
+    ? MASSAGE.ADD_FARM_SUCCESS.description(postResult)
+    : MASSAGE.ADD_FARM_EMPTY_ERROR.description;
+
   return (
     <>
       <form className="flex flex-col gap-4 px-2" onSubmit={handleFarmAddSubmit}>
@@ -56,27 +64,12 @@ const FarmAddForm = () => {
         </div>
         <Button>저장</Button>
       </form>
-      {isModalOpen && (
-        <Portal backgroundClick={close}>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4 items-center">
-              <Title
-                title={
-                  postResult
-                    ? MASSAGE.ADD_FARM_SUCCESS.title
-                    : MASSAGE.ADD_FARM_EMPTY_ERROR.title
-                }
-              />
-              <p>
-                {postResult
-                  ? MASSAGE.ADD_FARM_SUCCESS.description(postResult)
-                  : MASSAGE.ADD_FARM_EMPTY_ERROR.description}
-              </p>
-            </div>
-            <Button onClick={close}>닫기</Button>
-          </div>
-        </Portal>
-      )}
+      <MassageModal
+        isModalOpen={isModalOpen}
+        close={close}
+        title={modalTitle}
+        description={modalDescription}
+      />
     </>
   );
 };
