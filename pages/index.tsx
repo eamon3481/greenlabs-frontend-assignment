@@ -1,13 +1,22 @@
 import React, { FormEventHandler } from "react";
-import { ScreenWrap, Container, Input, Button } from "components";
+import {
+  ScreenWrap,
+  Container,
+  Input,
+  Button,
+  Portal,
+  Title,
+} from "components";
 import { useSetRecoilState } from "recoil";
 import { userAtom } from "stores";
 import { useRouter } from "next/router";
+import useModal from "hooks/useModal";
 
 const Login = () => {
   const router = useRouter();
   const setUser = useSetRecoilState(userAtom);
 
+  const { isModalOpen, open, close } = useModal();
   const handleLoginSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -15,6 +24,10 @@ const Login = () => {
       id: { value: string };
       name: { value: string };
     };
+    if (!id.value || !name.value) {
+      open();
+      return;
+    }
 
     setUser({ id: id.value, name: name.value });
 
@@ -45,6 +58,17 @@ const Login = () => {
           />
           <Button>로그인</Button>
         </form>
+        {isModalOpen && (
+          <Portal backgroundClick={close}>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 items-center">
+                <Title title={"로그인 실패!"} />
+                <p>아이디와 이름을 입력해주세요</p>
+              </div>
+              <Button onClick={close}>닫기</Button>
+            </div>
+          </Portal>
+        )}
       </ScreenWrap>
     </Container>
   );
