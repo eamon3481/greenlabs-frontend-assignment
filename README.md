@@ -35,6 +35,16 @@
   1.  Q4-2 components/FarmAddForm/index.tsx
   1.  Q4-3 components/FarmAddForm/index.tsx
 
+### 테스트
+
+```
+yarn dev & yarn e2e
+```
+
+cypress를 이용한 e2e 테스트를 작성했습니다.
+
+- ./cypress/e2e 에 테스트 코드가 있습니다.
+
 ### 문제 참고 화면
 
 - ![스크린샷 2022-11-24 오후 4 37 46](https://user-images.githubusercontent.com/94509005/203722616-4f51c668-dde8-46bd-80b8-c9261958ed30.png)
