@@ -6,9 +6,9 @@ const Title = ({ title, onClick }: { title: string; onClick?: () => void }) => (
     <div className="flex justify-between items-center">
       <h1 className="text-xl font-bold">{title}</h1>
       {onClick && (
-        <div onClick={onClick}>
+        <button name="plus" onClick={onClick}>
           <AiOutlinePlus />
-        </div>
+        </button>
       )}
     </div>
   </div>

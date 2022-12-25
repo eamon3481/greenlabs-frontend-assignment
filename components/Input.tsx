@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, InputHTMLAttributes } from "react";
 
 const Input = ({
   name,
@@ -6,13 +6,17 @@ const Input = ({
   placeholder,
   value,
   onChange,
+  ...inputAttribute
 }: {
   name: string;
   type: string;
   placeholder?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-}) => (
+} & Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "value" | "type" | "name" | "placeholder"
+>) => (
   <div className="border rounded overflow-hidden">
     <input
       type={type}
@@ -22,6 +26,7 @@ const Input = ({
       onChange={onChange}
       className="p-1 w-full outline-none"
       autoComplete="off"
+      {...inputAttribute}
     />
   </div>
 );
