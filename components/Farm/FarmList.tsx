@@ -18,7 +18,7 @@ const FarmList = ({
   HouseActive: (farmId: number, houseId: number) => void;
 }) => {
   return (
-    <div className="p-2 border rounded bg-white drop-shadow">
+    <li className="p-2 border rounded bg-white drop-shadow">
       <div className="flex items-center justify-between">
         <h2 className="font-bold">
           {name} ({crops})
@@ -45,7 +45,7 @@ const FarmList = ({
           ))}
         </ul>
       )}
-    </div>
+    </li>
   );
 };
 

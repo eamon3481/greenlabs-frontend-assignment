@@ -11,7 +11,7 @@ const Farm = () => {
   if (!data || isLoading) return null;
 
   return (
-    <div className="px-2 flex flex-col gap-2">
+    <ul className="px-2 flex flex-col gap-2">
       {data.farms.map((farm) => (
         <FarmList
           key={farm.id}
@@ -20,7 +20,7 @@ const Farm = () => {
           HouseActive={activeHouse}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
