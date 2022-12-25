@@ -15,9 +15,7 @@ describe("이름과 아이디를 입력하여 로그인 할 수 있습니다.", 
   });
 
   it("아이디와 이름을 입력한 후, 로그인 버튼을 누르면, /home 라우터로 이동합니다.", () => {
-    cy.get("input[name='name']").type(NAME);
-    cy.get("input[name='id']").type(ID);
-    cy.get("button[type='submit']").click();
+    cy.login(ID, NAME);
     cy.location("pathname").should("eq", "/home");
   });
   it(`아이디와 이름을 입력하지 않고 로그인 버튼을 누르면 ""로그인 실패" 모달이 뜬다.`, () => {
@@ -25,9 +23,7 @@ describe("이름과 아이디를 입력하여 로그인 할 수 있습니다.", 
     cy.contains("로그인 실패").should("exist");
   });
   it("로그인한 상태에서는 /home 에서 이름과 아이디를 보여줍니다.", () => {
-    cy.get("input[name='name']").type(NAME);
-    cy.get("input[name='id']").type(ID);
-    cy.get("button[type='submit']").click();
+    cy.login(ID, NAME);
     cy.contains(NAME).should("exist");
     cy.contains(ID).should("exist");
   });

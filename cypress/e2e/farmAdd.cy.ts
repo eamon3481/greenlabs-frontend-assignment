@@ -3,9 +3,7 @@ import { CROP, FARM, ID, NAME } from "cypress/support/commands";
 describe("농장 추가 페이지에서, 농장명과 작물명을 입력하면 추가할 수 있다.", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.get("input[name='name']").type(NAME);
-    cy.get("input[name='id']").type(ID);
-    cy.get("button[type='submit']").click();
+    cy.login(ID, NAME);
     cy.get("button[name='plus']").click();
     cy.intercept("POST", "/api/addfarm").as("addFarm");
   });

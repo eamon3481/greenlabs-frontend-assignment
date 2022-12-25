@@ -1,12 +1,15 @@
-import { ID, NAME } from "cypress/support/commands";
+import {
+  ID,
+  NAME,
+  ACTIVE_COLOR,
+  INACTIVE_COLOR,
+} from "cypress/support/commands";
 import { farms } from "./mockData";
 
 describe("/home 에 접속하면 /api/farm 을 호출한 뒤에, FarmList 를 보여줍니다.", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.get("input[name='name']").type(NAME);
-    cy.get("input[name='id']").type(ID);
-    cy.get("button[type='submit']").click();
+    cy.login(ID, NAME);
     cy.intercept("GET", "/api/farm", { farms }).as("getFarmList");
   });
 
@@ -28,8 +31,7 @@ describe("/home 에 접속하면 /api/farm 을 호출한 뒤에, FarmList 를 �
         return;
       }
       cy.contains(farm.name)
-        .parent()
-        .parent()
+        .parents("li")
         .within(() => {
           farm.houses.forEach((house) => {
             cy.contains(house.name).should("exist");
@@ -37,13 +39,13 @@ describe("/home 에 접속하면 /api/farm 을 호출한 뒤에, FarmList 를 �
               cy.contains(house.name).should(
                 "have.css",
                 "backgroundColor",
-                "rgb(122, 234, 156)"
+                ACTIVE_COLOR
               );
             } else {
               cy.contains(house.name).should(
                 "have.css",
                 "backgroundColor",
-                "rgb(255, 130, 105)"
+                INACTIVE_COLOR
               );
             }
           });
@@ -60,8 +62,7 @@ describe("/home 에 접속하면 /api/farm 을 호출한 뒤에, FarmList 를 �
       );
 
       cy.contains(farm.name)
-        .parent()
-        .parent("li")
+        .parents("li")
         .within(() => {
           cy.contains(total).should("exist");
         });
@@ -75,20 +76,19 @@ describe("/home 에 접속하면 /api/farm 을 호출한 뒤에, FarmList 를 �
         return;
       }
       cy.contains(farm.name)
-        .parent()
-        .parent()
+        .parents("li")
         .within(() => {
           farm.houses.forEach((house) => {
             if (house.active) {
               cy.contains(house.name)
                 .click()
-                .should("have.css", "backgroundColor", "rgb(255, 130, 105)")
+                .should("have.css", "backgroundColor", INACTIVE_COLOR)
                 .contains("중지");
             } else {
               cy.contains(house.name).click();
 
               cy.contains(house.name)
-                .should("have.css", "backgroundColor", "rgb(122, 234, 156)")
+                .should("have.css", "backgroundColor", ACTIVE_COLOR)
                 .contains("가동중");
             }
           });
