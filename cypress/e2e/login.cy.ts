@@ -1,5 +1,4 @@
-const NAME = "안동민";
-const ID = "eamon3481";
+import { ID, NAME } from "cypress/support/commands";
 
 describe("이름과 아이디를 입력하여 로그인 할 수 있습니다.", () => {
   beforeEach(() => {
